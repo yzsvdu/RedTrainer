@@ -1,2 +1,2 @@
 # RedTrainer
-Custom Injection Bot Client for Game
+Custom Injection Bot Client for PokeMMO

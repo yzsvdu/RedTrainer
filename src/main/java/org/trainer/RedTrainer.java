@@ -3,8 +3,8 @@ package org.trainer;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
-import org.trainer.interceptors.Trainer;
-import org.trainer.utils.WindowCallback;
+import org.trainer.interceptors.GameLoopInterceptor;
+import org.trainer.interceptors.WindowCallbackInterceptor;
 
 import java.lang.instrument.Instrumentation;
 
@@ -17,14 +17,14 @@ public class RedTrainer {
                 .type(ElementMatchers.nameStartsWith("f.Ic0"))
                 .transform((builder, typeDescription, classLoader, module, classToRedefine) ->
                         builder.method(ElementMatchers.named("invoke"))
-                                .intercept(Advice.to(WindowCallback.class))
+                                .intercept(Advice.to(WindowCallbackInterceptor.class))
                 )
 
                 //intercepts function in main game loop to inject custom code
                 .type(ElementMatchers.nameStartsWith("f.MJ0"))
                 .transform((builder, typeDescription, classLoader, module, classToRedefine) ->
                         builder.method(ElementMatchers.named("a00"))
-                                .intercept(Advice.to(Trainer.class))
+                                .intercept(Advice.to(GameLoopInterceptor.class))
 
                 )
                 .installOn(inst);
