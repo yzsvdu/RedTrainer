@@ -1,0 +1,20 @@
+/* 1 */ package f;public final class th0 extends hO { public final Ip om; public final short E8; public mc[] L50; public final boolean RW(int paramInt) { mc mc1; if (h1.J20(paramInt, BM.M8)) { int j; if (((j = this.F7) + 1) % this.pj0 != 0) this.F7 = j + 1;  } else if (h1.J20(paramInt, BM.Oq)) { int j; if (((j = this.F7) + 1) % this.pj0 != 1) this.F7 = j - 1;  } else if (h1.J20(paramInt, BM.ni)) { int j; int k; if ((j = this.F7) - (k = this.pj0) >= 0) this.F7 = j - k;  } else { int j; int k; if (h1.J20(paramInt, BM.N70) && (j = this.F7) + (k = this.pj0) < this.L50.length) this.F7 = j + k;  }  int i; mc[] arrayOfMc; if ((i = this.F7) >= 0 && i < (arrayOfMc = this.L50).length) VA0.c90(arrayOfMc[i]);  if (h1.J20(paramInt, BM.bC) && p3()) { if ((mc1 = this.L50[this.F7]).kN)
+/*   */       {
+/*   */         
+/* 4 */         hm.Fz0(this.TG0.oh0); }  return true; }
+/* 5 */      if (h1.J20(paramInt, BM.lc)) C40((byte)-1);  return true; }
+/* 6 */   public p30 LG0; public int F7; public int pj0 = 3; public th0(byte paramByte, Aq paramAq, short paramShort) { super(paramByte, paramAq); this.E8 = paramShort; Xu("messagebox"); (this.om = new Ip()).Xu("npc-interaction-panel"); (new Ip()).Zf0(true); this.L50 = new mc[6]; mc[] arrayOfMc; for (paramByte = 0; paramByte < (arrayOfMc = this.L50).length; paramByte = (byte)(paramByte + 1)) { mc mc1; this("", ""); arrayOfMc[paramByte] = mc1; this.L50[paramByte].Xu("/battle-button-ui"); j40 j40; if ((j40 = km.u4.s40(aq0.LI).ky((short)paramByte)) == null) { this.L50[paramByte].s6("-"); this.L50[paramByte].Ep0(""); this.L50[paramByte].sk0(false); this.L50[paramByte].CW().H(); } else { this.L50[paramByte].s6(j40.m()); if (!j40.Q00() && j40.h60().HH0(KM.U40, paramShort)) { this.L50[paramByte].Ep0(Ml0.OH0(78)); } else { this.L50[paramByte].Ep0(Ml0.OH0(79)); this.L50[paramByte].sk0(false); }  short s = j40.eC().Vf0(); byte b = j40.s5(); this.L50[paramByte].CW().sm(um0.TK0().lb(s, j40.ol0(), b)); this.L50[paramByte].CW().tL(36, 36); this.L50[paramByte].CW().zT(4, 2); }  this.L50[paramByte].C70(et.COM2); this.L50[paramByte].tW(new xZ(this, paramByte)); }  (this.LG0 = new p30(Ml0.OH0(53), 96, 30)).Xu("battle-button-return"); this.LG0.tW(new pt(this)); arrayOfJG02[0] = arrayOfMc[0]; arrayOfJG02[1] = arrayOfMc[1]; JG0[] arrayOfJG02; (arrayOfJG02 = new JG0[3])[2] = (arrayOfMc = this.L50)[2]; (new U90[2])[0] = this.om.mE0().Mg(new JG0[3]); arrayOfJG02[0] = arrayOfMc[3]; arrayOfJG02[1] = arrayOfMc[4]; (arrayOfJG02 = new JG0[3])[2] = (arrayOfMc = this.L50)[5]; this.om.WN(this.om.d7().cOM8(new U90[] { null, this.om.mE0().Mg(new JG0[3]) })); arrayOfJG01[0] = this.L50[0]; JG0[] arrayOfJG01; (arrayOfJG01 = new JG0[2])[1] = this.L50[3]; arrayOfU90[0] = this.om.mE0().Mg(new JG0[2]); arrayOfJG01[0] = this.L50[1]; (arrayOfJG01 = new JG0[2])[1] = this.L50[4]; arrayOfU90[1] = this.om.mE0().Mg(new JG0[2]); arrayOfJG01[0] = this.L50[2]; (arrayOfJG01 = new JG0[2])[1] = this.L50[5]; U90[] arrayOfU90; (arrayOfU90 = new U90[3])[2] = this.om.mE0().Mg(new JG0[2]); this.om.rK0(this.om.d7().cOM8(new U90[3])); J8(this.om); J8(this.LG0); } public final boolean Cs0() { return false; } public final void EX(nY paramnY) { this.om.Tm(km.wI0.dG(), 240); } public final void d40() { this.om.Tm(800, 115); int i = (km.wI0.k1() - 500) / 4; i = km.wI0.dG() / 2 - 400; this.om.ME(i, i + 350); mc[] arrayOfMc; int j; byte b; for (j = (arrayOfMc = this.L50).length, b = 0; b < j; ) { arrayOfMc[b].uh0(200, 48); b++; }  this.LG0.mM(); this.LG0.uh0(128, 24); this.LG0.ME(this.om.m40() - this.LG0.xY, this.om.mD() - this.LG0.HC);
+/* 7 */     mM(); }
+/*   */ 
+/*   */   
+/*   */   public final boolean Eq() {
+/*   */     return false;
+/*   */   }
+/*   */   
+/*   */   public final void SB0(int paramInt1, int paramInt2) {} }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/th0.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

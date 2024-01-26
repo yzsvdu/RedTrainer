@@ -1,0 +1,9 @@
+/* 1 */ package f;public abstract class cOM9 { public static D3 kG(Class paramClass1, Class<D3> paramClass2) { if (paramClass2 == D3.class) paramClass2 = null;  if (paramClass2 != null) try { return paramClass2.newInstance(); } catch (Exception exception) { throw new y8("Can't instantiate property transformer", exception); }   if (exception == Boolean.class || exception == boolean.class)
+/* 2 */       return rC.D;  if (exception == Byte.class || exception == byte.class) return xe0.const;  if (exception == Character.class || exception == char.class) return WT.Jb0;  if (exception == Double.class || exception == double.class) return Uz0.ZN;  if (exception == Float.class || exception == float.class) return gb0.J1;  if (exception == Integer.class || exception == int.class) return aw.mo;  if (exception == Long.class || exception == long.class) return fE0.Po0;  if (exception == Short.class || exception == short.class) return xI.Qs0;  if (exception == String.class) return Kq.Pr;  if (exception.isEnum()) return Com1.NK;  if (exception == File.class) return xp.ld;  if (qi.ml((Class)exception, InetSocketAddress.class)) return gK0.Com3;  if (exception == InetAddress.class) return qT.rg;  if (exception == Pattern.class) return lPT8.tl0;  if (exception == Class.class) return ev0.WI0;  throw new y8(B40.df("Transformer not found for class ").append(exception.getName()).toString()); }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/cOM9.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

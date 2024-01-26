@@ -1,0 +1,9 @@
+/* 1 */ package f;public final class LJ0 extends Hx implements Serializable { private static final long serialVersionUID = -3389157631240246157L; public final String[] Y8; public final XV g2; public LJ0(String[] paramArrayOfString) { this
+/* 2 */       .Y8 = paramArrayOfString = new String[paramArrayOfString.length]; int i = paramArrayOfString.length; System.arraycopy(paramArrayOfString, 0, paramArrayOfString, 0, i); this.g2 = this; } public final String toString() { this(); StringBuilder stringBuilder; (new StringBuilder()).append(LJ0.class.getSimpleName()); (new StringBuilder()).append("("); if (this.Y8 != null) for (byte b = 0; b < this.Y8.length; ) { if (b > 0) stringBuilder.append(",");  stringBuilder.append(this.Y8[b]); b++; }   stringBuilder.append(")"); return stringBuilder.toString(); } public final boolean accept(File paramFile) { String str; String[] arrayOfString; int i; byte b; for (str = paramFile.getName(), i = (arrayOfString = this.Y8).length, b = 0; b < i; ) { XV xV; (xV = this.g2).getClass(); String str1; int j = (str1 = arrayOfString[b]).length(); if (str.regionMatches(xV.eG0 ^ true, str.length() - j, str1, 0, j)) return true;  b++; }  return false; } public final boolean accept(File paramFile, String paramString) { String[] arrayOfString; int i; byte b; for (i = (arrayOfString = this.Y8).length, b = 0; b < i; ) { XV xV; (xV = this.g2).getClass(); String str; int j = (str = arrayOfString[b]).length(); if (paramString.regionMatches(xV.eG0 ^ true, paramString.length() - j, str, 0, j)) return true;  b++; }  return false; }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/LJ0.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
+ */

@@ -1,0 +1,12 @@
+/* 1 */ package f;public final class pE extends wj0 implements mX, vt0 { public final tw sy0; public final pRn Ja; public final Ui0 fF0; public pE(tw paramtw, Texture paramTexture, int paramInt1, int paramInt2, int paramInt3, int paramInt4, pRn parampRn) { super(0, 0, paramInt1, paramInt2); this.sy0 = paramtw; this.Ja = parampRn; this(paramTexture, 0, 0, paramInt1, paramInt2); this.fF0 = ui0; Ui0 ui0; (ui0 = new Ui0()).zt0(false, true); } public final void W8(fB0 paramfB0, int paramInt1, int paramInt2, int paramInt3, int paramInt4) { this.sy0.yT
+/* 2 */       .og0(tw.kI0);
+/* 3 */     this.fF0.vr(this.sy0.we(this.Ja)); float f1 = paramInt1, f2 = paramInt2, f3 = paramInt3, f4 = paramInt4; this.fF0.t50(f1, f2, f3, f4); this.fF0.Ne(this.sy0.yT); } public pE(tw paramtw, Texture paramTexture, int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6, pRn parampRn) { super(paramInt1, paramInt2, paramInt3, paramInt4); this.sy0 = paramtw; this.Ja = parampRn; this(paramTexture, paramInt1, paramInt2, paramInt3, paramInt4); this.fF0 = ui0; Ui0 ui0; (ui0 = new Ui0()).zt0(false, true); } public pE(pE parampE, pRn parampRn) { super(parampE); this.sy0 = parampE.sy0; this.Ja = parampRn; Texture texture = parampE.fF0.rP(); int i = parampE.Pe; int j = parampE.Ub0; int k = parampE.sl; int m = parampE.N5; (this.fF0 = new Ui0(this, i, j, k, m)).zt0(false, true); } public final void destroy() { this.sy0.cd0.Ct(this, true); } public final mX rv0(pRn parampRn) { if (parampRn != null) return (parampRn = this.Ja.o10(parampRn)).equals(this.Ja) ? this : new pE(this, parampRn);  throw new NullPointerException("color"); } public final void Gt0(uP paramuP, int paramInt1, int paramInt2) { int i = this.sl; int j = this.N5; W8(paramuP, paramInt1, paramInt2, i, j); } public final pe0 LPT8() { Texture texture = this.fF0.G3; float f1 = this.fF0.mP; float f2 = this.fF0.WT;
+/* 4 */     float f3 = this.fF0.zV;
+/* 5 */     float f4 = this.fF0.bh0; return new pe0(this, f1, f2, f3, f4); }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/pE.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

@@ -1,0 +1,23 @@
+/* 1 */ package f;public final class pV extends GS implements Np0 { public final void Nl(hm0 paramhm01, hm0 paramhm02, boolean paramBoolean1, boolean paramBoolean2, short paramShort, boolean paramBoolean3, kf paramkf, b60 paramb60) { F40 f40 = F40.ef0; byte b = 14;
+/* 2 */     int j = paramkf.AD.ex(635, paramhm02); String[] arrayOfString; (arrayOfString = new String[2])[0] = paramhm02.fA(); int i = 110000; (new String[2])[1] = 
+/*   */       
+/* 4 */       Ml0.OH0(this.aw0 + i);
+/*   */     
+/* 6 */     paramkf.Kq(Ml0.lz((byte)2, f40, b, j, arrayOfString)); }
+/*   */ 
+/*   */   
+/*   */   public final short aw0;
+/*   */   
+/*   */   public pV(short paramShort) {
+/*   */     this.aw0 = paramShort;
+/*   */   }
+/*   */   
+/*   */   public final byte YG0() {
+/*   */     return 49;
+/*   */   } }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/pV.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

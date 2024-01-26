@@ -1,0 +1,22 @@
+/* 1 */ package f;public final class e00 { private static final ArrayList attributes = new ArrayList(); public static final e00 FONT_FAMILIES; public static final e00 HORIZONTAL_ALIGNMENT = new e00(AuX.class, AuX.XT, true), VERTICAL_ALIGNMENT = new e00(Om0.class, Om0.PH0, true), TEXT_INDENT, TEXT_DECORATION = new e00(EY.class, EY.u0, true), TEXT_DECORATION_HOVER = new e00(EY.class, null, true); public static final e00 FONT_SIZE; public final String toString() { try { Field[] arrayOfField; int i; byte b; for (i = (arrayOfField = e00.class.getFields()).length, b = 0; b < i; ) { Field field; if (Modifier.isStatic((field = arrayOfField[b]).getModifiers()) && field.get(null) == this) { String str1 = field.getName(); // Byte code: goto -> 61 }  b++; }  } finally {} String str = "?"; return this; } static { Ok ok1 = Ok.qu0; TEXT_INDENT = new e00(Ok.class, ok1, true); } static { this("default", null); eL eL; Ok ok3; e00 e001, e002, e003, e004, e005, e006, e007, e008;
+/* 2 */     FONT_FAMILIES = new e00(eL.class, eL, true); this(14.0F, 1); FONT_SIZE = new e00(Ok.class, ok3, true); } public static final e00 FONT_WEIGHT = new e00(Integer.class, Integer.valueOf(400), true); public static final e00 FONT_ITALIC; public static final e00 TAB_SIZE = new e00(Integer.class, Integer.valueOf(8), true); public static final e00 LIST_STYLE_IMAGE = new e00(String.class, "ul-bullet", true); public static final e00 LIST_STYLE_TYPE = new e00(au.class, au.aq, true); public static final e00 PREFORMATTED; public static final e00 BREAKWORD; public static final e00 COLOR = new e00(pRn.class, pRn.WHITE, true); public static final e00 COLOR_HOVER = new e00(pRn.class, null, true); public static final e00 INHERIT_HOVER; public static final e00 CLEAR = new e00(UG.class, UG.J10, false); public static final e00 DISPLAY = new e00(Sx0.class, Sx0.z00, false); public static final e00 FLOAT_POSITION = new e00(Gj.class, Gj.FC0, false); public static final e00 WIDTH; public static final e00 HEIGHT; public static final e00 BACKGROUND_IMAGE = new e00(String.class, null, false); public static final e00 BACKGROUND_COLOR; public static final e00 BACKGROUND_COLOR_HOVER; public static final e00 MARGIN_TOP = new e00(); public static final e00 MARGIN_LEFT = new e00(); public static final e00 MARGIN_RIGHT = new e00(); public static final e00 MARGIN_BOTTOM = new e00(); public static final e00 PADDING_TOP = new e00(); public static final e00 PADDING_LEFT = new e00(); public static final e00 PADDING_RIGHT = new e00(); public static final e00 PADDING_BOTTOM = new e00(); public static final Yc0 MARGIN; public static final Yc0 PADDING; public final boolean V3; public final Class Tw0; public final Object b10; public final int x10; static { MARGIN = new Yc0(e001, e002, e003, e004); PADDING = new Yc0(e005, e006, e007, e008); } static { Boolean bool = Boolean.FALSE; FONT_ITALIC = new e00(Boolean.class, bool, true); } static { PREFORMATTED = new e00(Boolean.class, bool, true); BREAKWORD = new e00(Boolean.class, bool, true); } static { INHERIT_HOVER = new e00(Boolean.class, bool, true); } static { Ok ok2 = Ok.U00; WIDTH = new e00(Ok.class, ok2, false); HEIGHT = new e00(Ok.class, ok2, false); } static { pRn pRn = pRn.TRANSPARENT; BACKGROUND_COLOR = new e00(pRn.class, pRn, false); BACKGROUND_COLOR_HOVER = new e00(pRn.class, pRn, false); this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); } static { this(Ok.class, ok1, false); }
+/*   */ 
+/*   */   
+/*   */   public e00(Class paramClass, Object paramObject, boolean paramBoolean) {
+/*   */     this.V3 = paramBoolean;
+/*   */     this.Tw0 = paramClass;
+/*   */     this.b10 = paramObject;
+/*   */     this.x10 = arrayList.size();
+/*   */     ArrayList<e00> arrayList;
+/*   */     (arrayList = attributes).add(this);
+/*   */   }
+/*   */   
+/*   */   public static int Jk() {
+/*   */     return attributes.size();
+/*   */   } }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/e00.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

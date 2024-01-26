@@ -1,0 +1,9 @@
+/* 1 */ package f;public final class lw0 { public final int s00; public final int uj; public final boolean f3; public final int We0; public int TZ; public String M8; public final boolean equals(Object paramObject) { boolean bool; if (!(paramObject instanceof lw0)) return false;  if ((paramObject = paramObject) != null && this.s00 == ((lw0)paramObject).s00 && this.uj == ((lw0)paramObject).uj && this.We0 == ((lw0)paramObject).We0 && this.f3 == ((lw0)paramObject).f3 && this.M8.equals(((lw0)paramObject).M8) && this.ed == ((lw0)paramObject).ed) { bool = true; } else { bool = false; }  return bool; }
+/* 2 */   public int ed; public final int pe0; public lw0(int paramInt1, int paramInt2, String paramString) { this(paramInt1, paramInt2, paramString, 0); } public lw0(int paramInt1, int paramInt2, String paramString, int paramInt3) { this(paramInt1, paramInt2, c, bool, paramString, paramInt3); } public lw0(int paramInt1, int paramInt2, int paramInt3, boolean paramBoolean, String paramString) { this(paramInt1, paramInt2, paramInt3, paramBoolean, paramString, 0); } public lw0(int paramInt1, int paramInt2, int paramInt3, boolean paramBoolean, String paramString, int paramInt4) { this.s00 = paramInt1; this.uj = paramInt2; this.We0 = paramInt3; this.f3 = paramBoolean; this.M8 = paramString; this.ed = paramInt4; this.pe0 = Integer.numberOfTrailingZeros(paramInt1); } public final int hashCode() { int i = (((this.pe0 << 8) + (this.ed & 0xFF)) * 541 + this.uj) * 541; return this.M8.hashCode() + i; }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/lw0.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
+ */

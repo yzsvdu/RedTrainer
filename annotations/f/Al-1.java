@@ -1,0 +1,25 @@
+/* 1 */
+package f;
+
+public final class Al implements Runnable {
+    public final void run() {
+        dG0 dG01 = this.xB0;
+        boolean bool = false;
+        pA.Dg0
+/*   */
+/* 3 */.SR(false, this.cB0, false, null, null);
+        km.u4.lx0(this.cB0, bool);
+    }
+
+    /*   */
+    /*   */
+    /*   */
+    public Al(dG0 paramdG0) {
+    }
+}
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/Al.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

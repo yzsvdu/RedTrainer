@@ -1,0 +1,8 @@
+/* 1 */ package f;public final class bq implements con { public final void ng(Object paramObject, int paramInt, float[] paramArrayOffloat) { float f1, f2; rH rH = (rH)paramObject; switch (paramInt) { default: if (!Yw) throw new AssertionError();  return;case 7: this.Ej = (int)(f1 = paramArrayOffloat[0]); this.WB0 = (int)f2; this.Cf0 = (int)(f1 / 2.0F); this.Tn = (int)((f2 = paramArrayOffloat[1]) / 2.0F); return;case 6: this.Ej = (int)paramArrayOffloat[0]; this.WB0 = (int)paramArrayOffloat[1]; return;case 5: this.WB0 = (int)paramArrayOffloat[0]; return;case 4: this.Ej = (int)paramArrayOffloat[0]; return;case 3: this.Cf0 = (int)paramArrayOffloat[0]; this.Tn = (int)paramArrayOffloat[1]; return;case 2: this.Tn = (int)paramArrayOffloat[0]; return;case 1: break; }  this.Cf0 = (int)paramArrayOffloat[0]; } public final int Uu0(Object paramObject, int paramInt, float[] paramArrayOffloat) { rH rH = (rH)paramObject; switch (paramInt) { default: if (Yw) return 0;  throw new AssertionError();case 7: paramArrayOffloat[0] = this.Ej; paramArrayOffloat[1] = this.WB0; return 2;case 6: paramArrayOffloat[0] = this.Ej; paramArrayOffloat[1] = this.WB0; return 2;case 5: paramArrayOffloat[0] = this.WB0; return 1;case 4: paramArrayOffloat[0] = this.Ej; return 1;case 3: paramArrayOffloat[0] = this.Cf0; paramArrayOffloat[1] = this.Tn; return 2;case 2: paramArrayOffloat[0] = this.Tn; return 1;case 1: break; }  paramArrayOffloat[0] = this.Cf0; return 1; }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/bq.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

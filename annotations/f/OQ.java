@@ -1,0 +1,9 @@
+/* 1 */ package f;public class OQ extends g4 { public static final float[] W9 = new float[] { 0.0F, 0.6666667F, 0.2857143F, 0.13333334F, 0.06451613F, 0.031746034F, 0.015748031F, 0.007843138F, 0.0039138943F, 0.0019550342F, 9.770396E-4F, 4.884005E-4F, 2.4417043E-4F, 1.2207776E-4F, 6.103702E-5F }; public static final float[] lPT2 = new float[] { 0.0F, -0.6666667F, -0.85714287F, -0.93333334F, -0.9677419F, -0.984127F, -0.992126F, -0.99607843F, -0.99804306F, -0.9990225F, -0.9995115F, -0.9997558F, -0.9998779F, -0.99993896F, -0.9999695F }; public int E7; public int ui; public int rd0; public void rH(AH0 paramAH0, Ym0 paramYm0, ls0 paramls0) { this.rd0 = i; int i; if ((i = paramAH0.Ze0(4)) != 15) { if (paramls0 != null) paramls0.Zc0(i, 4);  if ((i = this.rd0) != 0) { this.cl = i + 1; this.bv0 = W9[i]; this.Iz = lPT2[i]; }  return; }  throw new OD(OD.f80(514)); } public float qL; public int cl; public float ua; public float bv0; public float Iz; public OQ(int paramInt) { this.E7 = paramInt; this.ui = 0; } public void ai0(AH0 paramAH0, Ym0 paramYm0) { if (this.rd0 != 0) this.qL = K30.dr0[paramAH0.Ze0(6)];  } public boolean Pg0(AH0 paramAH0) { if (this.rd0 != 0) this.ua = paramAH0.Ze0(this.cl);  if (++this.ui == 12) { this.ui = 0; return true; }  return false; } public boolean cOM7(int paramInt, Va paramVa1, Va paramVa2) { if (this.rd0 != 0 && paramInt != 2) { float f = (this.ua * this.bv0 + this.Iz) * this.qL; paramInt = this.E7; paramVa1.z0[paramInt] = f; }
+/* 2 */      return true; }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/OQ.class
+ * Java compiler version: 6 (50.0)
+ * JD-Core Version:       1.1.3
+ */

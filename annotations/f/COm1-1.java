@@ -1,0 +1,12 @@
+/* 1 */ package f;public final class COm1 implements iq0 { public final MG ws; public final fQ ui0; public COm1() { MG mG; fQ fQ1; this(4); this.ws = this; this(); this.ui0 = this; } public COm1(String paramString) { this(UB0.vj0.aP(paramString)); } public final void fb0(to paramto) { int i = paramto.h6.Z8; MG mG;
+/* 2 */     i = MG.nf((mG = this.ws).xl + i, mG.hc); if (this.ws.Hm.length < i) mG.lW(i); 
+/* 3 */     for (Hc0 hc02 = paramto.h6.r30(); hc02.hasNext(); ) { Is is; if ((is = (Is)hc02.next()).QK0 == null) { Texture texture; RD0 rD0 = is.DL; Uc uc = is.oH; boolean bool = is.Pl; this(rD0, uc, bool); is.QK0 = texture; }  cu0 cu0 = is.Im0; is.QK0.setFilter(cu0, is.Fr0); A00 a00 = is.Is; is.QK0.setWrap(a00, is.g60); this.ws.GV(is.QK0); }  this.ui0.ZY(paramto.O80.Z8); for (Hc0 hc01 = paramto.O80.r30(); hc01.hasNext(); ) { int m, n; P70 p70 = new P70(); Se0 se0; Texture texture = (se0 = (Se0)hc01.next()).V10.QK0; int j = ((Se0)hc01.next()).I0, k = ((Se0)hc01.next()).wm; boolean bool; if (bool = ((Se0)hc01.next()).lPT2) { n = se0.lI; } else { n = se0.Q6; }  if (bool) { m = se0.Q6; } else { m = se0.lI; }  this(texture, j, k, n, m); p70.IC = se0.QB; p70.Pk = se0.Lk; p70.rd = se0.NK; p70.jh0 = se0.hy; p70.gp0 = se0.public; p70.H3 = se0.eq0; p70.Kf0 = se0.lPT2; p70.S00 = se0.Gu; p70.cs0 = se0.m4; if (se0.Sa0) p70.zt0(false, true);  this.ui0.Com3(p70); }  } public COm1(RD0 paramRD0) { this(paramRD0, paramRD0.wT()); } public COm1(RD0 paramRD0, boolean paramBoolean) { this(paramRD0, paramRD0.wT(), paramBoolean); } public COm1(RD0 paramRD01, RD0 paramRD02) { this(paramRD01, paramRD02, false); } public COm1(RD0 paramRD01, RD0 paramRD02, boolean paramBoolean) { this(paramRD01, paramRD02, paramBoolean); to to; this(this); } public COm1(to paramto) { MG mG; fQ fQ1; this(4); this.ws = this; this(); this.ui0 = this; fb0(paramto); } public final fQ Uw0() { return this.ui0; } public final void dispose() { for (To to = this.ws.jF0(); to.hasNext(); ((Texture)to.next()).dispose()); int i = MG.nf(0, this.hc); MG mG; Object[] arrayOfObject; if ((arrayOfObject = (mG = this.ws).Hm).length <= i) { if (this.xl != 0) { this.xl = 0; Arrays.fill(arrayOfObject, (Object)null); }  } else { this
+/* 4 */         .xl = 0; lW(i); }
+/*   */      }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/COm1.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
+ */

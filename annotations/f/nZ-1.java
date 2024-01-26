@@ -1,0 +1,16 @@
+/*   */ package f;public final class nZ extends Handler { public static final String AuX = Logger.class.getName(); public static final int lv = Level.FINEST.intValue(); public static final int Sz0 = Level.FINE.intValue(); public static void L70() { Logger logger; Handler[] arrayOfHandler; int i; byte b;
+/* 2 */     for (i = (arrayOfHandler = (logger = LogManager.getLogManager().getLogger("")).getHandlers()).length, b = 0; b < i; ) { logger.removeHandler(arrayOfHandler[b]); b++; }  } public static final int tG = Level.INFO.intValue(); public static final int pf = Level.WARNING.intValue(); public static void tf0() { LogManager.getLogManager().getLogger("").addHandler(new nZ()); } public final void close() {} public final void flush() {} public final void publish(LogRecord paramLogRecord) { String str1; Throwable throwable; if (paramLogRecord == null) return;  String str2; if ((str2 = paramLogRecord.getLoggerName()) == null) str2 = "unknown.jul.logger";  ik ik = C00.R4(this); if (paramLogRecord.getMessage() == null) paramLogRecord.setMessage("");  if (this instanceof RL0) { ik = this; int i;
+/* 3 */       if ((i = paramLogRecord.getLevel().intValue()) <= lv) { i = 0; } else if (i <= Sz0) { i = 10; } else if (i <= tG) { i = 20; } else if (i <= pf) { i = 30; } else { i = 40; }
+/* 4 */        String str; if ((str = paramLogRecord.getMessage()) == null) { str = null; } else { ResourceBundle resourceBundle; if ((resourceBundle = paramLogRecord.getResourceBundle()) != null) try { str = resourceBundle.getString(str); } catch (MissingResourceException missingResourceException) {}  Object[] arrayOfObject; if ((arrayOfObject = paramLogRecord.getParameters()) != null && arrayOfObject.length > 0) try { str = MessageFormat.format(str, arrayOfObject); } catch (IllegalArgumentException illegalArgumentException) {}  }
+/* 5 */        str1 = AuX; throwable = paramLogRecord.getThrown(); log(null, this, i, str, null, throwable); }
+/* 6 */     else { String str; if ((str = throwable.getMessage()) == null) { str = null; } else { ResourceBundle resourceBundle; if ((resourceBundle = throwable.getResourceBundle()) != null) try { str = resourceBundle.getString(str); } catch (MissingResourceException missingResourceException) {}  Object[] arrayOfObject; if ((arrayOfObject = throwable.getParameters()) != null && arrayOfObject.length > 0) try { str = MessageFormat.format(str, arrayOfObject); } catch (IllegalArgumentException illegalArgumentException) {}  }
+/* 7 */        int i; if ((i = throwable.getLevel().intValue()) <= lv || i <= Sz0) { throwable.getThrown(); getClass(); } else if (i <= tG) { info(str, throwable.getThrown()); } else if (i <= pf) { warn(str, throwable.getThrown()); } else { error(str, throwable.getThrown()); }
+/*   */        }
+/*   */      }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/nZ.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

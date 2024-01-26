@@ -1,0 +1,17 @@
+/* 1 */ package com.badlogic.gdx.graphics.g3d.particles.influencers;public class SpawnInfluencer extends Influencer { public SpawnShapeValue spawnShapeValue; public ParallelArray.FloatChannel positionChannel; public ParallelArray.FloatChannel rotationChannel; public SpawnInfluencer() { PointSpawnShapeValue pointSpawnShapeValue; this(); this.spawnShapeValue = (SpawnShapeValue)this; } public void activateParticles(int paramInt1, int paramInt2) { int i; int j; for (j = paramInt1 * (i = ((ParallelArray.Channel)this.positionChannel).strideSize), i = paramInt2 * i + j; j < i; ) { SpawnShapeValue spawnShapeValue = this.spawnShapeValue; spawnShapeValue.spawn(eo, this.controller.emitter.percent); eo eo; (eo = ParticleControllerComponent.TMP_V1).eM(this.controller.transform); int k = j + 0; arrayOfFloat[k] = eo.x; k = j + 1; arrayOfFloat[k] = eo.y; j += 2; float[] arrayOfFloat; (arrayOfFloat = this.positionChannel.data)[j] = eo.z; j += ((ParallelArray.Channel)this.positionChannel).strideSize; }  for (paramInt2 = paramInt1 * (paramInt1 = ((ParallelArray.Channel)this.rotationChannel).strideSize), paramInt1 = paramInt2 * paramInt1 + paramInt2; paramInt2 < paramInt1; ) { Matrix4 matrix4 = this.controller.transform; boolean bool = true; matrix4.getClass(); TG0 tG0; (tG0 = ParticleControllerComponent.TMP_Q).dJ(bool, matrix4);
+/* 2 */       int k = paramInt2 + 0; arrayOfFloat[k] = tG0.D80; k = paramInt2 + 1; arrayOfFloat[k] = tG0.tb0; k = paramInt2 + 2; arrayOfFloat[k] = tG0.z60; paramInt2 += 3; float[] arrayOfFloat; (arrayOfFloat = this.rotationChannel.data)[paramInt2] = tG0.AD; paramInt2 += ((ParallelArray.Channel)this.rotationChannel).strideSize; }  } public SpawnInfluencer(SpawnShapeValue paramSpawnShapeValue) { this.spawnShapeValue = paramSpawnShapeValue; } public SpawnInfluencer(SpawnInfluencer paramSpawnInfluencer) { this.spawnShapeValue = paramSpawnInfluencer.spawnShapeValue.copy(); } public void init() { this.spawnShapeValue.init(); } public void allocateChannels() { this.positionChannel = (ParallelArray.FloatChannel)this.controller.particles.addChannel(ParticleChannels.Position); this.rotationChannel = (ParallelArray.FloatChannel)this.controller.particles.addChannel(ParticleChannels.Rotation3D); } public void start() { this.spawnShapeValue.start(); } public SpawnInfluencer copy() { return new SpawnInfluencer(this); } public void write(It paramIt) { paramIt.Zg(SpawnShapeValue.class, this.spawnShapeValue, "spawnShape"); } public void read(It paramIt, bM0 parambM0) { this.spawnShapeValue = (SpawnShapeValue)COm9.aD0(paramIt, parambM0, "spawnShape", SpawnShapeValue.class, null); }
+/*   */ 
+/*   */   
+/*   */   public void save(sz0 paramsz0, ResourceData paramResourceData) {
+/*   */     this.spawnShapeValue.save(paramsz0, paramResourceData);
+/*   */   }
+/*   */   
+/*   */   public void load(sz0 paramsz0, ResourceData paramResourceData) {
+/*   */     this.spawnShapeValue.load(paramsz0, paramResourceData);
+/*   */   } }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/com/badlogic/gdx/graphics/g3d/particles/influencers/SpawnInfluencer.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
+ */

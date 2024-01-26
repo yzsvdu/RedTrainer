@@ -1,0 +1,9 @@
+/* 1 */ package f;public final class Lq0 extends xk { public final byte K4; public final xr0 fI0; public final void tZ(K70 paramK70, fo0 paramfo0, Ih0 paramIh0, float paramFloat1, float paramFloat2, float paramFloat3) { float f = this.pt + UB0.M60.Qy; this
+/* 2 */       .HK.wP(f); paramK70.q10(this.HK, paramfo0); } public final lpt1 HK; public float pt; public Lq0(byte paramByte, xr0 paramxr0) { int i; char c; this.pt = 0.0F; this.K4 = paramByte; this.fI0 = paramxr0; switch (paramxr0.OB0()) { default: paramByte = 15; c = 'ۗ'; break;case 63: paramByte = 14; c = 'ۖ'; break;case 61: paramByte = 13; c = 'ۖ'; break;case 10: paramByte = 16; c = 'ۘ'; break;case 8: i = L70.Oj0().fu() + 8; c = 'ە'; break;case 5: i = L70.Oj0().fu() + 4; c = 'ە'; break;case 4: case 6: case 33: i = L70.Oj0().fu() + 0; c = 'ە'; break; }  this.HK = lpt11; lpt11.ml0(0, true); lpt11.ml0(1, true); lpt1 lpt11; (lpt11 = zp0.vY().jt(i)).ng(c); if (paramxr0.Y00()) { eo eo = paramxr0.j5(); float f = this.y * 0.25F + 0.05F; lpt11.mh.g7(this.x * 0.25F + 0.125F, f, this.z * 0.25F + 0.175F); } else { float f = paramxr0.i00() * 0.25F + 0.05F; lpt11.mh.g7(paramxr0.Ka() * 0.25F + 0.125F, f, paramxr0.hA0() * 0.25F + 0.175F); }  } public final boolean i2() { boolean bool; KI kI = this.fI0.Q4(); byte b = this.K4; if (this.hc[b] == this.fI0) { bool = true; } else { bool = false; }  return bool ^ true; }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/Lq0.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

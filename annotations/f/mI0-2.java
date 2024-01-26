@@ -1,0 +1,10 @@
+/* 1 */ package f;public enum mI0 { public final int Jo; public final int df0; public final o80 k20(o80 paramo80) { int i = paramo80.oj;
+/* 2 */     i = this.Jo & i;
+/* 3 */     return new o80(i); } mI0() { this.df0 = i; int i; if ((i = ordinal()) != 0) { i = -1 << 32 - i; } else { i = 0; }  this.Jo = i; } static { this("MASK_00", 0); mI0 mI01; mI0 mI02; mI0 mI03; mI0 mI04; mI0 mI05; mI0 mI06; mI0 mI07; mI0 mI08; mI0 mI09; mI0 mI010; mI0 mI011; mI0 mI012; mI0 mI013; mI0 mI014; mI0 mI015; mI0 mI016; mI0 mI017; mI0 mI018; mI0 mI019; mI0 mI020; mI0 mI021; mI0 mI022; mI0 mI023; mI0 mI024; mI0 mI025; mI0 mI026; mI0 mI027; mI0 mI028; mI0 mI029; mI0 mI030; mI0 mI031; mI0 mI032; mI0 mI033; this("MASK_01", 1); this("MASK_02", 2); this("MASK_03", 3); this("MASK_04", 4); this("MASK_05", 5); this("MASK_06", 6); this("MASK_07", 7); this("MASK_08", 8); this("MASK_09", 9); this("MASK_10", 10); this("MASK_11", 11); this("MASK_12", 12); this("MASK_13", 13); this("MASK_14", 14); this("MASK_15", 15); this("MASK_16", 16); this("MASK_17", 17); this("MASK_18", 18); this("MASK_19", 19); this("MASK_20", 20); this("MASK_21", 21); this("MASK_22", 22); this("MASK_23", 23); this("MASK_24", 24); this("MASK_25", 25); this("MASK_26", 26); this("MASK_27", 27); this("MASK_28", 28); this("MASK_29", 29); this("MASK_30", 30); this("MASK_31", 31); this("MASK_32", 32); sl0 = new mI0[] { mI01, mI02, mI03, mI04, mI05, mI06, mI07, mI08, mI09, mI010, mI011, mI012, mI013, mI014, mI015, mI016, mI017, mI018, mI019, mI020, mI021, mI022, mI023, mI024, mI025, mI026, mI027, mI028, mI029, mI030, mI031, mI032, mI033 }; } public final int N70() { return this.df0; } public final o80 Ty(o80 paramo80) { int i = paramo80.oj; i = this.Jo ^ 0xFFFFFFFF | i; return new o80(i); }
+/*   */    }
+
+
+/* Location:              /Users/vnnsnnt/Documents/Codespace/JavaWorkspace/RedTrainer/src/main/java/org/trainer/client/PokeMMO.jar!/f/mI0.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */
