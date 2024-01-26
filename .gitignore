@@ -2,7 +2,7 @@
 /target/
 
 # Maven build files
-pom.xml
+#pom.xml
 pom.xml.backup
 pom.xml.releaseBackup
 pom.xml.versionsBackup
