@@ -5,6 +5,7 @@ import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
 import org.trainer.interceptors.GameLoopInterceptor;
 import org.trainer.interceptors.WindowCallbackInterceptor;
+import org.trainer.utils.BattleButtonTracer;
 import org.trainer.utils.Trace;
 
 import java.lang.instrument.Instrumentation;
@@ -28,6 +29,10 @@ public class RedTrainer {
                                 .intercept(Advice.to(GameLoopInterceptor.class))
 
                 )
+                .type(ElementMatchers.nameStartsWith("f.mc"))
+                .transform(((builder, typeDescription, classLoader, javaModule, protectionDomain) ->
+                        builder.method(ElementMatchers.nameStartsWith("i2"))
+                                .intercept(Advice.to(BattleButtonTracer.class))))
 
                 .installOn(inst);
     }

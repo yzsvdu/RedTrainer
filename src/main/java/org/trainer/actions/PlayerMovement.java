@@ -8,40 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerMovement {
+    public static PlayerMovement instance;
 
-    public static int stepCount = 0;
-    public static int keyIndex = 0;
+    public int frameStep = 0;
 
-    public static void performCirclingAction(Object target) throws Exception {
-        InputHandler inputHandler = InputHandler.getInstance(target);
-        Method invokeMethod = inputHandler.keyboardHandler.getClass().getMethod("invoke", long.class, int.class, int.class, int.class, int.class);
-        Field ne0Field = target.getClass().getDeclaredField("ne0");
-        ne0Field.setAccessible(true);
-        Object ne0Value = ne0Field.get(target);
+    private final Object window;
 
-        List<Integer> keyCodes = new ArrayList<>();
-        keyCodes.add(87); // W
-        keyCodes.add(65); // A
-        keyCodes.add(83); // S
-        keyCodes.add(68); // D
+    private int directionIndex = 0;
 
-        long window = (long) ne0Value;
+    private PlayerMovement(Object window) throws Exception {
+        this.window = window;
+    }
 
-        if(stepCount % 60 == 0) {
-            invokeMethod.invoke(inputHandler.keyboardHandler, window, keyCodes.get(keyIndex), 0, 0, 0);
-
-            if(keyIndex + 1 > 3) {
-                keyIndex = 0;
-            } else {
-                keyIndex++;
-            }
+    public static PlayerMovement getInstance(Object window) throws Exception {
+        if (instance == null) {
+            instance = new PlayerMovement(window);
         }
-        int keycode = keyCodes.get(keyIndex);
-        int scancode = 0;
-        int action = 1;
-        int modifier = 0;
+        return instance;
+    }
 
-        invokeMethod.invoke(inputHandler.keyboardHandler, window, keycode, scancode, 1, modifier);
-        stepCount++;
+    public void performCirclingAction() throws Exception {
+        if(frameStep % 30 == 0) {
+            InputHandler.sendKeyboardInput(this.window, InputHandler.DSAW.get(directionIndex % 4), true);
+            directionIndex++;
+        }
+        InputHandler.sendKeyboardInput(this.window, InputHandler.DSAW.get(directionIndex % 4), false);
+        frameStep++;
     }
 }

@@ -3,19 +3,10 @@ package org.trainer.utils;
 import java.lang.reflect.Field;
 
 public class StateHandler {
-    private static StateHandler instance;
-    public static Object stateHandler; // Field QH0 of type Oj in MJO
 
-    public StateHandler(Object target) throws Exception{
-        stateHandler = getStateHandler(target);
-    }
-    public static StateHandler getInstance(Object target) throws Exception {
-        if (instance == null) {
-            instance = new StateHandler(target);
-        }
-        return instance;
-    }
-    private Object getStateHandler(Object target) throws Exception {
+    public StateHandler () {}
+
+    public static Object getStateHandler(Object target) throws Exception { // this is Oj object
         Field qh0Field = target.getClass().getDeclaredField("QH0");
         qh0Field.setAccessible(true);
         Object stateHandler;
@@ -23,11 +14,22 @@ public class StateHandler {
         return stateHandler;
     }
 
-    public boolean checkisBattling() throws Exception {
+    public static boolean checkisBattling(Object target) throws Exception { // this is vH object
+        Object stateHandler = getStateHandler(target);
         Field K7Field = stateHandler.getClass().getField("K7");
         K7Field.setAccessible(true);
         Object battleEventObject;
         battleEventObject = K7Field.get(stateHandler);
         return battleEventObject != null;
     }
+
+    public static Object getWindowGUI(Object target) throws Exception { // this is js object
+        Object stateHandler = getStateHandler(target);
+        Field js0Field = stateHandler.getClass().getField("js0");
+        js0Field.setAccessible(true);
+        Object windowGUI;
+        windowGUI = js0Field.get(stateHandler);
+        return windowGUI;
+    }
+
 }

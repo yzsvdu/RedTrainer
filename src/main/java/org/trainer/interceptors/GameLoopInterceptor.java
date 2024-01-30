@@ -1,6 +1,7 @@
 package org.trainer.interceptors;
 
 import net.bytebuddy.asm.Advice;
+import org.trainer.actions.PlayerBattle;
 import org.trainer.actions.PlayerMovement;
 import org.trainer.utils.InputHandler;
 import org.trainer.utils.StateHandler;
@@ -9,22 +10,24 @@ public class GameLoopInterceptor {
 
     public static boolean enabled = true;
     public static boolean isBattling = false;
-    public static InputHandler inputHandler;
-    public static StateHandler stateHandler;
-
     @Advice.OnMethodEnter
     public static void enter(@Advice.This Object target) throws Exception {
         if(!enabled) return;
 
-        // retrieve helper utilities
-        inputHandler = InputHandler.getInstance(target);
-        stateHandler = StateHandler.getInstance(target);
+        // Get action agents
+        PlayerBattle playerBattle = PlayerBattle.getInstance(target);
+        PlayerMovement playerMovement = PlayerMovement.getInstance(target);
 
         // check for state changes
-        isBattling = stateHandler.checkisBattling();
+        isBattling = StateHandler.checkisBattling(target);
 
         // react to changes
-        System.out.println("In battle: " + isBattling);
+        if(isBattling) {
+            playerBattle.react();
+        } else {
+            playerMovement.performCirclingAction();
+        }
+
     }
 
     @Advice.OnMethodExit

@@ -12,6 +12,15 @@
     - has other players WX.java object stored in js0.eG0.qb.ND 
     - chat messages at js0.MH0.
 
+### mc.java
+    - Button ui element for battle gui
+
+### js.java
+    - main gui
+
+### JG0.java 
+    holds 
+
 ### aY.java
     - h8() 
         - initalizes input pulling and callbacks
@@ -21,6 +30,7 @@
     - ko() appears to reset the input polling ?
     - gt0() returns boolean on state of right mouse click
     - f() appears to map key codes maybe to switch keybinds
+
 
 
 ### Xb0.java
@@ -73,3 +83,15 @@
                         - field ta is the Q90 object, the pokemons stats 
                 - hm0[1][i] holds the enemy/wild pokemon(s) outside
                     
+
+
+### Ap.java
+    - Buttons for main login screen 
+
+
+
+### mc.java 
+    - Buttons for battle gui 
+    - field com9 is title for button
+
+    
