@@ -1,25 +1,27 @@
 package org.trainer;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 //import static jdk.internal.agent.Agent.startAgent;
 
@@ -32,50 +34,65 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Red Trainer v1");
+        primaryStage.setTitle("Red Trainer Control Panel");
 
-        // Create buttons
-        ToggleButton enableAgentButton = new ToggleButton("Enable Agent", "Disable Agent");
-        ToggleButton startTrainingButton = new ToggleButton("Start Training", "Stop Training");
-        ToggleButton startCirclingButton = new ToggleButton("Start Circling", "Stop Circling");
-        ToggleButton startAutoBattleButton = new ToggleButton("Start AutoBattle", "Stop AutoBattle");
+        // Create ToggleButton
+        ToggleButton agentToggleButton = new ToggleButton("Enable Agent");
+        agentToggleButton.setStyle("-fx-background-color: green;"); // Set initial style
 
-        // Create layout
-        VBox vbox = new VBox(10); // 10 pixels spacing
-        vbox.setPadding(new Insets(20)); // 20 pixels padding
-        vbox.getChildren().addAll(enableAgentButton, startTrainingButton, startCirclingButton, startAutoBattleButton);
+        // Create Checkboxes
+        CheckBox autoBattleCheckBox = new CheckBox("Auto Battle");
+        CheckBox autoWalkCheckBox = new CheckBox("Auto Walk");
 
-        // Create banner
-        Label bannerLabel = new Label("Red Trainer v1");
+        // Create ToggleButton HBox
+        HBox toggleButtonBox = new HBox(agentToggleButton);
+        toggleButtonBox.setPadding(new Insets(10));
 
-        // Create root layout
-        StackPane root = new StackPane();
-        root.getChildren().addAll(vbox, bannerLabel);
+        // Create Checkboxes VBox
+        VBox checkBoxesBox = new VBox(5, autoBattleCheckBox, autoWalkCheckBox);
+        checkBoxesBox.setPadding(new Insets(10));
 
-        // Create scene
+        // Create TextArea for server messages
+        TextArea serverMessagesTextArea = new TextArea();
+        serverMessagesTextArea.setEditable(false);
+
+        // Make the TextArea scrollable
+        VBox scrollableArea = new VBox(serverMessagesTextArea);
+        scrollableArea.setPadding(new Insets(10));
+        scrollableArea.setMinHeight(200);
+        scrollableArea.setMaxHeight(400);
+
+        // Create the main layout
+        BorderPane root = new BorderPane();
+        root.setTop(toggleButtonBox);
+        root.setCenter(checkBoxesBox);
+        root.setBottom(scrollableArea);
+
+        // Set actions for ToggleButton
+        agentToggleButton.setOnAction(e -> {
+            if (agentToggleButton.isSelected()) {
+                agentToggleButton.setText("Disable Agent");
+                agentToggleButton.setStyle("-fx-background-color: #e75050;");
+
+            } else {
+                agentToggleButton.setText("Enable Agent");
+                agentToggleButton.setStyle("-fx-background-color: #88e088;");
+                // Add your disable logic here
+            }
+        });
+
+        // Set up the scene
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);
 
-        // Show stage
         primaryStage.show();
+
+        new Thread(() -> connectToServer(serverMessagesTextArea)).start();
+
+
     }
 
-    private static class ToggleButton extends Button {
-        private boolean isRunning;
-
-        ToggleButton(String startText, String stopText) {
-            super(startText);
-            setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
-            setOnAction(event -> {
-                isRunning = !isRunning;
-                setText(isRunning ? stopText : startText);
-                setStyle(isRunning ? "-fx-background-color: #FF0000; -fx-text-fill: white;" :
-                        "-fx-background-color: #4CAF50; -fx-text-fill: white;");
-            });
-        }
-    }
-
-    private static void connectToServer() {
+    private void connectToServer(TextArea serverMessagesTextArea) {
         try {
             // Replace "localhost" with the actual IP address or hostname of your server
             String serverAddress = "localhost";
@@ -88,18 +105,28 @@ public class Client extends Application {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 
-            // Example: Sending a message to the server
             writer.println("Hello from the client!");
 
-            // Example: Receiving a response from the server
-            String response = reader.readLine();
-            System.out.println("Server response: " + response);
+            // Continuously listen for messages from the server
+            while (true) {
+                String message = reader.readLine();
+                if (message == null) {
+                    break; // End the loop if the server closes the connection
+                }
+
+                // Display the message in the TextArea
+                Platform.runLater(() -> serverMessagesTextArea.appendText(message + "\n"));
+            }
 
             // Close the socket when done
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void sendMessage(String message, PrintWriter writer) {
+        writer.println(message);
     }
 
 
