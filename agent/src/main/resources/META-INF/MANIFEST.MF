@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Premain-Class: org.trainer.RedTrainer
+Premain-Class: org.trainer.Agent
 Can-Redefine-Classes: true

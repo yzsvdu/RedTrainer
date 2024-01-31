@@ -29,6 +29,8 @@ pom.xml.versionsBackup
 *.swp
 
 # Exclude folders
-/client/
+/pokemmo-client/
+/agent/target/
+/client/target/
 
 *.DS_Store
