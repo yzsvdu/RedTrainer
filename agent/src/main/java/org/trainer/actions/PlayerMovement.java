@@ -16,6 +16,8 @@ public class PlayerMovement {
 
     private int directionIndex = 0;
 
+    public  int lastInputKey = 0;
+
     private PlayerMovement(Object window) throws Exception {
         this.window = window;
     }
@@ -33,6 +35,7 @@ public class PlayerMovement {
             directionIndex++;
         }
         InputHandler.sendKeyboardInput(this.window, InputHandler.DSAW.get(directionIndex % 4), false);
+        this.lastInputKey = InputHandler.DSAW.get(directionIndex % 4);
         frameStep++;
     }
 }

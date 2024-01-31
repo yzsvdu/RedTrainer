@@ -1,10 +1,13 @@
 package org.trainer;
 
+import com.google.gson.Gson;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
 import org.trainer.interceptors.GameLoopInterceptor;
 import org.trainer.interceptors.WindowCallbackInterceptor;
+import org.trainer.payloads.Payload;
+import org.trainer.payloads.TogglePayload;
 import org.trainer.utils.BattleButtonTracer;
 
 import java.io.BufferedReader;
@@ -67,15 +70,20 @@ public class Agent {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true)
         ) {
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null) {
-                System.out.println("Received from client: " + inputLine);
+            String jsonStringReceived;
+            while ((jsonStringReceived = reader.readLine()) != null) {
+                TogglePayload receivedPayload = new Gson().fromJson(jsonStringReceived, TogglePayload.class);
 
-                GameLoopInterceptor.enabled = false;
+                System.out.println("Received from client: " + receivedPayload.getMessage());
+                if(receivedPayload.getType().equals("TOGGLE")) {
+                    GameLoopInterceptor.toggle(receivedPayload.getPropertyName(), receivedPayload.getState());
+                }
+                Payload payloadToSend = new Payload();
+                payloadToSend.setMessage("Agent received: Payload of type " + receivedPayload.getType());
+                String jsonPayload = new Gson().toJson(payloadToSend);
 
-                // Process the input as needed
-                // For example, you can send a response back to the client
-                writer.println("Server received: " + inputLine);
+                // Send JSON string to the client
+                writer.println(jsonPayload);
             }
 
             System.out.println("Client disconnected: " + clientSocket.getInetAddress());

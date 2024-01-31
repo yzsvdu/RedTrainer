@@ -1,5 +1,6 @@
 package org.trainer;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -13,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.trainer.payloads.Payload;
+import org.trainer.payloads.TogglePayload;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +30,8 @@ import java.util.concurrent.Executors;
 
 public class Client extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
+
+    private PrintWriter serverWriter; // Declare PrintWriter as a member variable
 
     public static void main(String[] args) {
         launch(args);
@@ -73,60 +78,68 @@ public class Client extends Application {
             if (agentToggleButton.isSelected()) {
                 agentToggleButton.setText("Disable Agent");
                 agentToggleButton.setStyle("-fx-background-color: #e75050;");
+                TogglePayload togglePayload = new TogglePayload("AgentEnabled", 1);
+                togglePayload.setType("TOGGLE");
+                sendPayload(togglePayload);
 
             } else {
                 agentToggleButton.setText("Enable Agent");
                 agentToggleButton.setStyle("-fx-background-color: #88e088;");
-                // Add your disable logic here
+                TogglePayload togglePayload = new TogglePayload("AgentEnabled", 0);
+                togglePayload.setType("TOGGLE");
+                sendPayload(togglePayload);
             }
         });
 
         // Set up the scene
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);
-
         primaryStage.show();
 
+        // start the socket thread
         new Thread(() -> connectToServer(serverMessagesTextArea)).start();
-
 
     }
 
     private void connectToServer(TextArea serverMessagesTextArea) {
         try {
-            // Replace "localhost" with the actual IP address or hostname of your server
             String serverAddress = "localhost";
             int serverPort = 12343;
-
-            // Create a socket connection to the server
             Socket socket = new Socket(serverAddress, serverPort);
 
             // Create input and output streams for communication
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            serverWriter = new PrintWriter(socket.getOutputStream(), true);
 
-            writer.println("Hello from the client!");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             // Continuously listen for messages from the server
             while (true) {
-                String message = reader.readLine();
-                if (message == null) {
+                Payload receivedPayload = new Gson().fromJson(reader.readLine(), Payload.class);
+                if (receivedPayload == null) {
                     break; // End the loop if the server closes the connection
                 }
 
                 // Display the message in the TextArea
-                Platform.runLater(() -> serverMessagesTextArea.appendText(message + "\n"));
+                Platform.runLater(() -> serverMessagesTextArea.appendText(receivedPayload.getMessage() + "\n"));
             }
 
             // Close the socket when done
             socket.close();
+
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
-    private void sendMessage(String message, PrintWriter writer) {
-        writer.println(message);
+    private void sendPayload(Payload payload) {
+        if (serverWriter != null) {
+            String jsonPayload = new Gson().toJson(payload);
+            serverWriter.println(jsonPayload);
+        } else {
+            System.out.println("Error: PrintWriter is not initialized.");
+
+        }
     }
 
 

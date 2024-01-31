@@ -8,30 +8,40 @@ import org.trainer.utils.StateHandler;
 
 public class GameLoopInterceptor {
 
-    public static boolean enabled = true;
+    public static boolean agentEnabled = false;
     public static boolean isBattling = false;
+    public static boolean isWalking = false;
     @Advice.OnMethodEnter
-    public static void enter(@Advice.This Object target) throws Exception {
-        if(!enabled) return;
+    public static void enter(@Advice.This Object window) throws Exception {
 
-        // Get action agents
-        PlayerBattle playerBattle = PlayerBattle.getInstance(target);
-        PlayerMovement playerMovement = PlayerMovement.getInstance(target);
+        PlayerBattle playerBattle = PlayerBattle.getInstance(window);
+        PlayerMovement playerMovement = PlayerMovement.getInstance(window);
 
-        // check for state changes
-        isBattling = StateHandler.checkisBattling(target);
+        if (agentEnabled) {
+            // check for state changes
+            isBattling = StateHandler.checkisBattling(window);
 
-        // react to changes
-        if(isBattling) {
-            playerBattle.react();
+            // react to changes
+            if (isBattling) {
+                playerBattle.react();
+            } else if (isWalking) {
+                playerMovement.performCirclingAction();
+            }
         } else {
-            playerMovement.performCirclingAction();
+            // reset player movement to make player idle
+            if (playerMovement.lastInputKey != -1) {
+                InputHandler.sendKeyboardInput(window, playerMovement.lastInputKey, true);
+                playerMovement.lastInputKey = -1;
+            }
         }
-
     }
 
-    @Advice.OnMethodExit
-    public static void exit() {
-        // This code will be executed at the end of the a00 method
-    }
+   public static void toggle(String propertyName, int state) {
+        switch (propertyName) {
+            case "AgentEnabled":
+                agentEnabled = (state == 1);
+            case "AutoWalk":
+                isWalking = (state == 1);
+        }
+   }
 }
