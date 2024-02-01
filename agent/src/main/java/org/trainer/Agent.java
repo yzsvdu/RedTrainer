@@ -1,15 +1,14 @@
 package org.trainer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
 import org.trainer.interceptors.GameLoopInterceptor;
 import org.trainer.interceptors.WindowCallbackInterceptor;
-import org.trainer.payloads.Payload;
-import org.trainer.payloads.TogglePayload;
+import org.trainer.payloads.*;
 import org.trainer.utils.BattleButtonTracer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,24 +43,23 @@ public class Agent {
 
                 .installOn(inst);
 
-        new Thread(() -> startSocketServer()).start();
+        Thread agentServerThread = new Thread(() -> startAgentServer());
+        agentServerThread.setDaemon(true);
+        agentServerThread.start();
+
     }
 
-    private static void startSocketServer() {
-        System.out.println("Starting socket server");
-
+    private static void startAgentServer() {
         try (ServerSocket serverSocket = new ServerSocket(12343)) {
-            System.out.println("Server listening on port " + 12343);
-
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Connected to client: " + clientSocket.getInetAddress());
-
-                // Handle the client socket in a separate thread
                 new Thread(() -> handleClientSocket(clientSocket)).start();
+
             }
+
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
@@ -70,25 +68,31 @@ public class Agent {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true)
         ) {
-            String jsonStringReceived;
-            while ((jsonStringReceived = reader.readLine()) != null) {
-                TogglePayload receivedPayload = new Gson().fromJson(jsonStringReceived, TogglePayload.class);
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Payload.class, new PayloadDeserializer())
+                    .create();
 
-                System.out.println("Received from client: " + receivedPayload.getMessage());
-                if(receivedPayload.getType().equals("TOGGLE")) {
-                    GameLoopInterceptor.toggle(receivedPayload.getPropertyName(), receivedPayload.getState());
+            String receivedJson;
+            while ((receivedJson = reader.readLine()) != null) {
+                Payload receivedPayload = gson.fromJson(receivedJson, Payload.class);
+
+                // confirm that we received a payload from client
+                ResponsePayload responsePayload = new ResponsePayload();
+                responsePayload.setMessage("Agent received: Payload of type " + receivedPayload.getType());
+                responsePayload.setTimestampMillis(System.currentTimeMillis());
+                String responseJson = new Gson().toJson(responsePayload);
+                writer.println(responseJson);
+
+                if ("TOGGLE-PROPERTY".equals(receivedPayload.getType())) {
+                    TogglePropertyPayload togglePayload = (TogglePropertyPayload) receivedPayload;
+                    GameLoopInterceptor.toggle(togglePayload.getPropertyName(), togglePayload.getPropertyStatus());
+
                 }
-                Payload payloadToSend = new Payload();
-                payloadToSend.setMessage("Agent received: Payload of type " + receivedPayload.getType());
-                String jsonPayload = new Gson().toJson(payloadToSend);
-
-                // Send JSON string to the client
-                writer.println(jsonPayload);
             }
 
-            System.out.println("Client disconnected: " + clientSocket.getInetAddress());
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 

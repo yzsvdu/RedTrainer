@@ -9,30 +9,33 @@ import org.trainer.utils.StateHandler;
 public class GameLoopInterceptor {
 
     public static boolean agentEnabled = false;
-    public static boolean isBattling = false;
-    public static boolean isWalking = false;
+    public static boolean autoWalkEnabled = false;
+    public static boolean autoBattleEnabled = false;
+
     @Advice.OnMethodEnter
     public static void enter(@Advice.This Object window) throws Exception {
-
         PlayerBattle playerBattle = PlayerBattle.getInstance(window);
         PlayerMovement playerMovement = PlayerMovement.getInstance(window);
 
         if (agentEnabled) {
             // check for state changes
-            isBattling = StateHandler.checkisBattling(window);
+            boolean isBattling = StateHandler.checkisBattling(window);
 
             // react to changes
-            if (isBattling) {
+            if (isBattling && autoBattleEnabled) {
                 playerBattle.react();
-            } else if (isWalking) {
+
+            } else if (autoWalkEnabled) {
                 playerMovement.performCirclingAction();
+
+            } else {
+                resetToIdle(window, playerMovement);
+
             }
+
         } else {
-            // reset player movement to make player idle
-            if (playerMovement.lastInputKey != -1) {
-                InputHandler.sendKeyboardInput(window, playerMovement.lastInputKey, true);
-                playerMovement.lastInputKey = -1;
-            }
+            resetToIdle(window, playerMovement);
+
         }
     }
 
@@ -40,8 +43,27 @@ public class GameLoopInterceptor {
         switch (propertyName) {
             case "AgentEnabled":
                 agentEnabled = (state == 1);
-            case "AutoWalk":
-                isWalking = (state == 1);
+                break;
+
+            case "AutoWalkEnabled":
+                autoWalkEnabled = (state == 1);
+                System.out.println(autoWalkEnabled);
+                break;
+
+            case "AutoBattleEnabled":
+                autoBattleEnabled = (state == 1);
+                System.out.println(autoBattleEnabled);
+                break;
+
+                
         }
+   }
+
+   public static void resetToIdle(Object window, PlayerMovement playerMovement) throws Exception {
+       if (playerMovement.lastInputKey != -1) {
+           InputHandler.sendKeyboardInput(window, playerMovement.lastInputKey, true);
+           playerMovement.lastInputKey = -1;
+
+       }
    }
 }

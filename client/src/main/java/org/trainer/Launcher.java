@@ -2,15 +2,20 @@ package org.trainer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.trainer.payloads.TogglePropertyPayload;
 
 import java.io.IOException;
 
 public class Launcher {
     private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
+    private static Process agentProcess;
+    private static Thread agentThread;
 
     public static void main(final String[] args) {
-        new Thread(() -> startAgent()).start();
+        agentThread = new Thread(() -> startAgent());
+        agentThread.start();
         Client.main(args);
+        System.exit(0);
 
     }
 
@@ -29,15 +34,13 @@ public class Launcher {
                     "-jar",
                     "PokeMMO.jar"
             );
-            Process agent = processBuilder.start();
-            int exitCode = agent.waitFor();
+            agentProcess = processBuilder.start();
+            int exitCode = agentProcess.waitFor();
             logger.info("Agent process completed with exit code: {}", exitCode);
+            System.exit(0);
 
         } catch (IOException | InterruptedException e) {
-
             throw new RuntimeException(e);
         }
     }
 }
-
-

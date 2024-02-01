@@ -1,13 +1,13 @@
 package org.trainer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,23 +15,25 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.trainer.payloads.Payload;
-import org.trainer.payloads.TogglePayload;
+import org.trainer.payloads.PayloadDeserializer;
+import org.trainer.payloads.ResponsePayload;
+import org.trainer.payloads.TogglePropertyPayload;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-//import static jdk.internal.agent.Agent.startAgent;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class Client extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
-
-    private PrintWriter serverWriter; // Declare PrintWriter as a member variable
+    private static String serverAddress = "localhost";
+    private static int serverPort = 12343;
+    private PrintWriter agentWriter;
 
     public static void main(String[] args) {
         launch(args);
@@ -39,11 +41,11 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Red Trainer Control Panel");
+        primaryStage.setTitle("Red Trainer CPanel");
 
         // Create ToggleButton
         ToggleButton agentToggleButton = new ToggleButton("Enable Agent");
-        agentToggleButton.setStyle("-fx-background-color: green;"); // Set initial style
+        agentToggleButton.setStyle("-fx-background-color: #85d785;"); // Set initial style
 
         // Create Checkboxes
         CheckBox autoBattleCheckBox = new CheckBox("Auto Battle");
@@ -53,9 +55,25 @@ public class Client extends Application {
         HBox toggleButtonBox = new HBox(agentToggleButton);
         toggleButtonBox.setPadding(new Insets(10));
 
+        // Create ComboBox for walk options
+        ComboBox<String> walkOptionsComboBox = new ComboBox<>();
+        walkOptionsComboBox.getItems().addAll("Circle", "Left-Right", "UpDown");
+        walkOptionsComboBox.setValue("Circle"); // Set default value
+
+        // Create HBox for autoWalkCheckBox and ComboBox
+        HBox autoWalkBox = new HBox(autoWalkCheckBox, walkOptionsComboBox);
+        autoWalkBox.setAlignment(Pos.CENTER_LEFT);
+        autoWalkBox.setSpacing(15);
+
         // Create Checkboxes VBox
-        VBox checkBoxesBox = new VBox(5, autoBattleCheckBox, autoWalkCheckBox);
+        VBox checkBoxesBox = new VBox(5, autoBattleCheckBox);
         checkBoxesBox.setPadding(new Insets(10));
+
+        // Set alignment for checkBoxesBox
+        checkBoxesBox.setAlignment(Pos.TOP_LEFT); // Set vertical alignment to top and horizontal alignment to left
+
+        // Update the layout
+        checkBoxesBox.getChildren().addAll(autoWalkBox);
 
         // Create TextArea for server messages
         TextArea serverMessagesTextArea = new TextArea();
@@ -78,49 +96,78 @@ public class Client extends Application {
             if (agentToggleButton.isSelected()) {
                 agentToggleButton.setText("Disable Agent");
                 agentToggleButton.setStyle("-fx-background-color: #e75050;");
-                TogglePayload togglePayload = new TogglePayload("AgentEnabled", 1);
-                togglePayload.setType("TOGGLE");
-                sendPayload(togglePayload);
+                TogglePropertyPayload togglePropertyPayload = new TogglePropertyPayload("AgentEnabled", 1);
+                sendPayload(togglePropertyPayload);
 
             } else {
                 agentToggleButton.setText("Enable Agent");
                 agentToggleButton.setStyle("-fx-background-color: #88e088;");
-                TogglePayload togglePayload = new TogglePayload("AgentEnabled", 0);
-                togglePayload.setType("TOGGLE");
-                sendPayload(togglePayload);
+                TogglePropertyPayload togglePropertyPayload = new TogglePropertyPayload("AgentEnabled", 0);
+                sendPayload(togglePropertyPayload);
             }
         });
 
+        autoBattleCheckBox.setOnAction(e -> {
+            boolean isSelected = autoBattleCheckBox.isSelected();
+            int propertyStatus;
+            if(isSelected) propertyStatus = 1;
+            else propertyStatus = 0;
+
+            System.out.println(propertyStatus);
+            String propertyName = "AutoBattleEnabled";
+            TogglePropertyPayload togglePropertyPayload = new TogglePropertyPayload(propertyName, propertyStatus);
+            sendPayload(togglePropertyPayload);
+
+        });
+
+        autoWalkCheckBox.setOnAction(e -> {
+            boolean isSelected = autoWalkCheckBox.isSelected();
+            int propertyStatus;
+            if(isSelected) propertyStatus = 1;
+            else propertyStatus = 0;
+
+            System.out.println(propertyStatus);
+            String propertyName = "AutoWalkEnabled";
+            TogglePropertyPayload togglePropertyPayload = new TogglePropertyPayload(propertyName, propertyStatus);
+            sendPayload(togglePropertyPayload);
+
+        });
+
+
+
         // Set up the scene
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(root, 500, 300);
         primaryStage.setScene(scene);
+        primaryStage.setOnCloseRequest(event -> {handleWindowClose();});
         primaryStage.show();
 
         // start the socket thread
-        new Thread(() -> connectToServer(serverMessagesTextArea)).start();
+        new Thread(() -> connectToAgent(serverMessagesTextArea)).start();
 
     }
 
-    private void connectToServer(TextArea serverMessagesTextArea) {
+    private void connectToAgent(TextArea serverMessagesTextArea) {
         try {
-            String serverAddress = "localhost";
-            int serverPort = 12343;
             Socket socket = new Socket(serverAddress, serverPort);
 
             // Create input and output streams for communication
-            serverWriter = new PrintWriter(socket.getOutputStream(), true);
-
+            agentWriter = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            Gson gson = new GsonBuilder().registerTypeAdapter(Payload.class, new PayloadDeserializer()).create();
 
-            // Continuously listen for messages from the server
             while (true) {
-                Payload receivedPayload = new Gson().fromJson(reader.readLine(), Payload.class);
-                if (receivedPayload == null) {
-                    break; // End the loop if the server closes the connection
-                }
+                Payload receivedPayload = gson.fromJson(reader.readLine(), Payload.class);
+                if (receivedPayload == null) break;
 
-                // Display the message in the TextArea
-                Platform.runLater(() -> serverMessagesTextArea.appendText(receivedPayload.getMessage() + "\n"));
+                if ("RESPONSE".equals(receivedPayload.getType())) {
+                    ResponsePayload responsePayload = (ResponsePayload) receivedPayload;
+                    LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(responsePayload.getTimestampMillis()), ZoneId.systemDefault());
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd@HH:mm:ss");
+                    String formattedDateTime = dateTime.format(formatter);
+                    String consoleLog = "[" + formattedDateTime + "] " + responsePayload.getMessage() + "\n";
+                    Platform.runLater(() -> serverMessagesTextArea.appendText(consoleLog));
+
+                }
             }
 
             // Close the socket when done
@@ -133,14 +180,26 @@ public class Client extends Application {
     }
 
     private void sendPayload(Payload payload) {
-        if (serverWriter != null) {
+        if (agentWriter != null) {
             String jsonPayload = new Gson().toJson(payload);
-            serverWriter.println(jsonPayload);
+            agentWriter.println(jsonPayload);
+
         } else {
             System.out.println("Error: PrintWriter is not initialized.");
 
         }
     }
 
+    private void handleWindowClose() {
+        logger.info("Closing client...");
+
+        // Terminate the agent process
+        if (agentWriter != null) {
+            sendPayload(new TogglePropertyPayload("AgentEnabled", 0));
+        }
+
+        // Close the socket and exit the application
+        Platform.exit();
+    }
 
 }

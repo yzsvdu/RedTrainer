@@ -66,6 +66,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4.1</version>
                 <configuration>
+                    <outputDirectory>${project.parent.basedir}/pokemmo-client</outputDirectory>
+
                     <!-- get all project dependencies -->
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
