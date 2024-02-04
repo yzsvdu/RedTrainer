@@ -9,11 +9,14 @@ import org.trainer.interceptors.GameLoopInterceptor;
 import org.trainer.interceptors.WindowCallbackInterceptor;
 import org.trainer.payloads.*;
 import org.trainer.utils.BattleButtonTracer;
+import org.trainer.utils.Trace;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.instrument.Instrumentation;
+import java.lang.reflect.Field;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -36,11 +39,16 @@ public class Agent {
                                 .intercept(Advice.to(GameLoopInterceptor.class))
 
                 )
+                // naively track what button we are hovering over by reading label and circling buttons
                 .type(ElementMatchers.nameStartsWith("f.mc"))
                 .transform(((builder, typeDescription, classLoader, javaModule, protectionDomain) ->
                         builder.method(ElementMatchers.nameStartsWith("i2"))
                                 .intercept(Advice.to(BattleButtonTracer.class))))
 
+                .type(ElementMatchers.nameStartsWith("f.kf"))
+                .transform(((builder, typeDescription, classLoader, javaModule, protectionDomain) ->
+                        builder.method(ElementMatchers.any())
+                                .intercept(Advice.to(Trace.class))))
                 .installOn(inst);
 
         Thread agentServerThread = new Thread(() -> startAgentServer());
@@ -96,5 +104,17 @@ public class Agent {
         }
     }
 
+    public static Object getChildFromParent(Object parent, String fieldName) throws Exception {
+        Field field = parent.getClass().getField(fieldName);
+        field.setAccessible(true);
+        Object child;
+        child = field.get(parent);
+        return child;
+    }
 
+    public static void setChildFromParent(Object parent, String fieldName, Object newValue) throws NoSuchFieldException, IllegalAccessException {
+        Field field = parent.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(parent, newValue);
+    }
 }

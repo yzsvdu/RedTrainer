@@ -2,11 +2,6 @@ package org.trainer.actions;
 
 import org.trainer.utils.InputHandler;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 public class PlayerMovement {
     public static PlayerMovement instance;
 
@@ -18,11 +13,11 @@ public class PlayerMovement {
 
     public  int lastInputKey = 0;
 
-    private PlayerMovement(Object window) throws Exception {
+    private PlayerMovement(Object window) {
         this.window = window;
     }
 
-    public static PlayerMovement getInstance(Object window) throws Exception {
+    public static PlayerMovement getInstance(Object window) {
         if (instance == null) {
             instance = new PlayerMovement(window);
         }
@@ -30,12 +25,13 @@ public class PlayerMovement {
     }
 
     public void performCirclingAction() throws Exception {
-        if(frameStep % 30 == 0) {
+        if(frameStep % 15 == 0) {
             InputHandler.sendKeyboardInput(this.window, InputHandler.DSAW.get(directionIndex % 4), true);
             directionIndex++;
         }
         InputHandler.sendKeyboardInput(this.window, InputHandler.DSAW.get(directionIndex % 4), false);
         this.lastInputKey = InputHandler.DSAW.get(directionIndex % 4);
         frameStep++;
+
     }
 }

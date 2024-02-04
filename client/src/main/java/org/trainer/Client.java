@@ -57,7 +57,7 @@ public class Client extends Application {
 
         // Create ComboBox for walk options
         ComboBox<String> walkOptionsComboBox = new ComboBox<>();
-        walkOptionsComboBox.getItems().addAll("Circle", "Left-Right", "UpDown");
+        walkOptionsComboBox.getItems().addAll("Circle", "Left-Right", "Up-Down");
         walkOptionsComboBox.setValue("Circle"); // Set default value
 
         // Create HBox for autoWalkCheckBox and ComboBox
@@ -138,7 +138,7 @@ public class Client extends Application {
         // Set up the scene
         Scene scene = new Scene(root, 500, 300);
         primaryStage.setScene(scene);
-        primaryStage.setOnCloseRequest(event -> {handleWindowClose();});
+        primaryStage.setOnCloseRequest(event -> handleWindowClose());
         primaryStage.show();
 
         // start the socket thread

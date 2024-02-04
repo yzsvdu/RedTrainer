@@ -70,6 +70,9 @@
 
 ### Oj.java 
     - Renders Display
+    - field js0 of type js is main gui 
+
+
     - field K7 of type vH holds battle event information
         - field AJ0 of type No0 marks if battle gui is present 
         - field P2 of type Gp0 holds battle states 
@@ -82,7 +85,12 @@
                         - field hp0 is the pokemons hp
                         - field ta is the Q90 object, the pokemons stats 
                 - hm0[1][i] holds the enemy/wild pokemon(s) outside
-                    
+
+### kf.java (battle gui)
+    -rX of type f.WD[] holds attack move stats
+    -Js of type f.Hj[][] holds the two pokemons outside on the field
+    -Y2, Uq0 of type f.mc[] holds attack move names
+    -AD of type f.Gp0 holds battle environment info / state
 
 
 ### Ap.java
@@ -94,4 +102,3 @@
     - Buttons for battle gui 
     - field com9 is title for button
 
-    

@@ -8,9 +8,9 @@ import org.trainer.utils.StateHandler;
 
 public class GameLoopInterceptor {
 
-    public static boolean agentEnabled = false;
+    public static boolean agentEnabled = true;
     public static boolean autoWalkEnabled = false;
-    public static boolean autoBattleEnabled = false;
+    public static boolean autoBattleEnabled = true;
 
     @Advice.OnMethodEnter
     public static void enter(@Advice.This Object window) throws Exception {
@@ -18,14 +18,16 @@ public class GameLoopInterceptor {
         PlayerMovement playerMovement = PlayerMovement.getInstance(window);
 
         if (agentEnabled) {
-            // check for state changes
-            boolean isBattling = StateHandler.checkisBattling(window);
+            Object battleEventObject = StateHandler.getBattleObject(window);
 
-            // react to changes
-            if (isBattling && autoBattleEnabled) {
-                playerBattle.react();
+            if (battleEventObject != null) {
+                if (autoBattleEnabled) {
+                    playerBattle.battle();
 
-            } else if (autoWalkEnabled) {
+                }
+            }
+
+            if (autoWalkEnabled && battleEventObject == null) {
                 playerMovement.performCirclingAction();
 
             } else {
@@ -55,7 +57,6 @@ public class GameLoopInterceptor {
                 System.out.println(autoBattleEnabled);
                 break;
 
-                
         }
    }
 
