@@ -25,7 +25,7 @@ public class PlayerBattle {
     private final long delayTime = 250; // ms
     private long elapsedDelayTime = 0;
 
-    private PlayerBattle(Object window) throws Exception {
+    private PlayerBattle(Object window) {
         this.window = window;
     }
 
@@ -53,6 +53,7 @@ public class PlayerBattle {
                     selectButton(battleGUI, currentButtons, buttonIndex);
                 }
             }
+
         } else {
             Object[] attackMoves = (Object[]) Agent.getChildFromParent(battleGUI, "rX");
             int bestIndex = -1;

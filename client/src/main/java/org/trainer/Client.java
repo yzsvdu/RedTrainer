@@ -14,10 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.trainer.payloads.Payload;
-import org.trainer.payloads.PayloadDeserializer;
-import org.trainer.payloads.ResponsePayload;
-import org.trainer.payloads.TogglePropertyPayload;
+import org.trainer.payloads.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,11 +54,16 @@ public class Client extends Application {
 
         // Create ComboBox for walk options
         ComboBox<String> walkOptionsComboBox = new ComboBox<>();
-        walkOptionsComboBox.getItems().addAll("Circle", "Left-Right", "Up-Down");
+        walkOptionsComboBox.getItems().addAll("Circle", "Left-Right", "Up-Down", "Random");
         walkOptionsComboBox.setValue("Circle"); // Set default value
 
+        Label label = new Label("Radius");
+        ComboBox<Integer> radiusComboBox = new ComboBox<>();
+        radiusComboBox.getItems().addAll(1, 2, 3, 4, 5, 6);
+        radiusComboBox.setValue(3);
+
         // Create HBox for autoWalkCheckBox and ComboBox
-        HBox autoWalkBox = new HBox(autoWalkCheckBox, walkOptionsComboBox);
+        HBox autoWalkBox = new HBox(autoWalkCheckBox, walkOptionsComboBox, label,  radiusComboBox);
         autoWalkBox.setAlignment(Pos.CENTER_LEFT);
         autoWalkBox.setSpacing(15);
 
@@ -126,10 +128,25 @@ public class Client extends Application {
             if(isSelected) propertyStatus = 1;
             else propertyStatus = 0;
 
-            System.out.println(propertyStatus);
             String propertyName = "AutoWalkEnabled";
             TogglePropertyPayload togglePropertyPayload = new TogglePropertyPayload(propertyName, propertyStatus);
             sendPayload(togglePropertyPayload);
+
+        });
+
+        walkOptionsComboBox.setOnAction(e -> {
+            String selectedWalkOption = walkOptionsComboBox.getValue();
+            String propertyName = "WalkPattern";
+            SetPropertyPayload setPropertyPayload = new SetPropertyPayload(propertyName, selectedWalkOption);
+            sendPayload(setPropertyPayload);
+        });
+
+        // Add event handler to radiusComboBox
+        radiusComboBox.setOnAction(e -> {
+            Integer selectedRadius = radiusComboBox.getValue();
+            String propertyName = "WalkRadius";
+            SetPropertyPayload setPropertyPayload = new SetPropertyPayload(propertyName, selectedRadius);
+            sendPayload(setPropertyPayload);
 
         });
 

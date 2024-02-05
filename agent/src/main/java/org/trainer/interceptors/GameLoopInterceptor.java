@@ -7,11 +7,11 @@ import org.trainer.utils.InputHandler;
 import org.trainer.utils.StateHandler;
 
 public class GameLoopInterceptor {
-
-    public static boolean agentEnabled = true;
+    public static boolean agentEnabled = false;
     public static boolean autoWalkEnabled = false;
-    public static boolean autoBattleEnabled = true;
-
+    public static String autoWalkPattern = "Circle";
+    public static Double moveRadius = 3.0;
+    public static boolean autoBattleEnabled = false;
     @Advice.OnMethodEnter
     public static void enter(@Advice.This Object window) throws Exception {
         PlayerBattle playerBattle = PlayerBattle.getInstance(window);
@@ -28,9 +28,12 @@ public class GameLoopInterceptor {
             }
 
             if (autoWalkEnabled && battleEventObject == null) {
-                playerMovement.performCirclingAction();
+                playerMovement.performMovement(autoWalkPattern, moveRadius);
 
             } else {
+                playerMovement.initalized = false;
+                playerMovement.directionIndex = 0;
+                playerMovement.frameStep = 0;
                 resetToIdle(window, playerMovement);
 
             }
@@ -49,16 +52,27 @@ public class GameLoopInterceptor {
 
             case "AutoWalkEnabled":
                 autoWalkEnabled = (state == 1);
-                System.out.println(autoWalkEnabled);
                 break;
 
             case "AutoBattleEnabled":
                 autoBattleEnabled = (state == 1);
-                System.out.println(autoBattleEnabled);
                 break;
-
         }
    }
+
+   public static void set(String propertyName, Object value) {
+        switch (propertyName) {
+            case "WalkPattern":
+                autoWalkPattern = (String) value;
+                break;
+
+            case "WalkRadius":
+                moveRadius = (Double) value;
+                break;
+        }
+   }
+
+
 
    public static void resetToIdle(Object window, PlayerMovement playerMovement) throws Exception {
        if (playerMovement.lastInputKey != -1) {

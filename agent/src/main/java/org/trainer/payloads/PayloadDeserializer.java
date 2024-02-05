@@ -11,6 +11,8 @@ public class PayloadDeserializer implements JsonDeserializer<Payload> {
         switch (type) {
             case "TOGGLE-PROPERTY":
                 return context.deserialize(json, TogglePropertyPayload.class);
+            case "SET-PROPERTY":
+                return context.deserialize(json, SetPropertyPayload.class);
             case "RESPONSE":
                 return context.deserialize(json, ResponsePayload.class);
             default:

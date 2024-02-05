@@ -1,5 +1,7 @@
 package org.trainer.utils;
 
+import org.trainer.Agent;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -15,27 +17,21 @@ public class InputHandler {
     public static List<Integer> DSAW = Arrays.asList(KEY_D, KEY_S, KEY_A, KEY_W);
 
     private InputHandler () {}
-    public static Object getInputHandler(Object window) throws Exception { // this is aY object
-        Field wRField = window.getClass().getDeclaredField("wR");
-        wRField.setAccessible(true);
+    public static Object getInputHandler(Object window) throws Exception {
         Object inputHandler;
-        inputHandler = wRField.get(window);
+        inputHandler = Agent.getChildFromParent(window, "wR");
         return inputHandler;
     }
 
-    public static Object getKeyboardHandler(Object window) throws Exception { // this is Y7 object
+    public static Object getKeyboardHandler(Object window) throws Exception {
         Object inputHandler = getInputHandler(window);
-        Field oYField = inputHandler.getClass().getField("Oy");
-        oYField.setAccessible(true);
-        Object oYValue;
-        oYValue = oYField.get(inputHandler);
-        return oYValue;
+        Object keyboardHandler;
+        keyboardHandler = Agent.getChildFromParent(inputHandler, "Oy");
+        return keyboardHandler;
     }
 
     public static long getWindowId(Object window) throws Exception {
-        Field ne0Field = window.getClass().getDeclaredField("ne0");
-        ne0Field.setAccessible(true);
-        return (long) ne0Field.get(window);
+        return (long) Agent.getChildFromParent(window, "ne0");
     }
 
     public static void sendKeyboardSingleInput(Object window, int keyCode) throws Exception {
@@ -53,6 +49,4 @@ public class InputHandler {
         if(!release) keyboardMethod.invoke(keyboardHandler, windowId, keyCode, 0, 1, 0);
         else keyboardMethod.invoke(keyboardHandler, windowId, keyCode, 0, 0, 0);
     }
-
-
 }

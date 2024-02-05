@@ -8,8 +8,6 @@ import net.bytebuddy.matcher.ElementMatchers;
 import org.trainer.interceptors.GameLoopInterceptor;
 import org.trainer.interceptors.WindowCallbackInterceptor;
 import org.trainer.payloads.*;
-import org.trainer.utils.BattleButtonTracer;
-import org.trainer.utils.Trace;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,16 +37,6 @@ public class Agent {
                                 .intercept(Advice.to(GameLoopInterceptor.class))
 
                 )
-                // naively track what button we are hovering over by reading label and circling buttons
-                .type(ElementMatchers.nameStartsWith("f.mc"))
-                .transform(((builder, typeDescription, classLoader, javaModule, protectionDomain) ->
-                        builder.method(ElementMatchers.nameStartsWith("i2"))
-                                .intercept(Advice.to(BattleButtonTracer.class))))
-
-                .type(ElementMatchers.nameStartsWith("f.kf"))
-                .transform(((builder, typeDescription, classLoader, javaModule, protectionDomain) ->
-                        builder.method(ElementMatchers.any())
-                                .intercept(Advice.to(Trace.class))))
                 .installOn(inst);
 
         Thread agentServerThread = new Thread(() -> startAgentServer());
@@ -95,6 +83,9 @@ public class Agent {
                     TogglePropertyPayload togglePayload = (TogglePropertyPayload) receivedPayload;
                     GameLoopInterceptor.toggle(togglePayload.getPropertyName(), togglePayload.getPropertyStatus());
 
+                } else if ("SET-PROPERTY".equals(receivedPayload.getType())) {
+                    SetPropertyPayload setPropertyPayload = (SetPropertyPayload) receivedPayload;
+                    GameLoopInterceptor.set(setPropertyPayload.getPropertyName(), setPropertyPayload.getValue());
                 }
             }
 
