@@ -5,12 +5,13 @@
 ## Features
 1. **Runs while the game window is unfocused.**
 2. **Auto Walk** (movement timing be bugged sometimes so do it in enclosed space)
-3. **Auto Fish**
-4. **Auto Catch** (can specify Pokémon, currently uses pokeballs)
-5. **Auto Battle**
+3. **Auto Fish** (keybind 4, false swipe is necessary right now)
+4. **Auto Catch** (can specify Pokémon, currently uses pokeballs,  false swipe is necessary right now)
+5. **Auto Battle** (can be used for payday or level up etc)
 
 ![GUI](img/gui.png)
 
+### Request Features by creating github issues.
 ## How to Use
 
 ### Requirements
