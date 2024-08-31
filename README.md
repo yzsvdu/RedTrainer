@@ -1,22 +1,25 @@
-# PokeMMO Bot Client
-
+# Red Trainer by yzsvdu
+##  Public PokeMMO Bot Client
 ![PokeMMO Bot Client](img/img.png)
 
 ## Features
 1. **Runs while the game window is unfocused.**
-2. **Auto Walk** (movement timing be bugged sometimes so do it in enclosed space)
+2. **Auto Walk** (movement timing may be bugged sometimes, so use it in enclosed spaces)
 3. **Auto Fish** (keybind 4, false swipe is necessary right now)
-4. **Auto Catch** (can specify Pokémon, currently uses pokeballs,  false swipe is necessary right now)
-5. **Auto Battle** (can be used for payday or level up etc)
+4. **Auto Catch** (can specify Pokémon, currently uses Pokéballs, false swipe is necessary right now)
+5. **Auto Battle** (can be used for payday or level up, etc.)
 
-![GUI](img/gui.png)
+## To Do List
+- [ ] Add support for using other balls in Auto Catch.
+- [ ] Add support for selecting for pokemons to search for. 
+- [ ] Improve GUI Look and Feel 
+- [ ] Add support to select move use order. 
 
-### Request Features by creating github issues.
 ## How to Use
 
 ### Requirements
 - **Java 17 Runtime**
-- https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+- [Download Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
 ### Windows
 1. Download the `windows_build` from the release.
