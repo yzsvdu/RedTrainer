@@ -1,6 +1,6 @@
 # Red Trainer by yzsvdu
 ##  Public PokeMMO Bot Client
-![PokeMMO Bot Client](img/img.png)
+![PokeMMO Bot Client](assets/img.png)
 
 ## Features
 1. **Runs while the game window is unfocused.**
