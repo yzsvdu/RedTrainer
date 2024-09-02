@@ -1,10 +1,9 @@
 # Red Trainer by vnnsnnt
 ## A PokeMMO Bot Client
 
-<div style="display: flex; justify-content: center;">
-    <img src="assets/controls.png" alt="Control Panel" width="400" style="margin-right: 10px;">
-    <img src="assets/game.png" alt="Game" width="400">
-</div>
+<img src="assets/controls.png" alt="Control Panel" style="width: 100%; max-width: 800px; margin-right: 10px;">
+
+
 
 ## Features
 1. **Runs while the game window is unfocused.**
