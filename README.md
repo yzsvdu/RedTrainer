@@ -1,19 +1,17 @@
-# Red Trainer by yzsvdu
-##  Public PokeMMO Bot Client
-![PokeMMO Bot Client](assets/img.png)
+# Red Trainer by vnnsnnt
+## A PokeMMO Bot Client
+
+<div style="display: flex; justify-content: center;">
+    <img src="assets/controls.png" alt="Control Panel" width="400" style="margin-right: 10px;">
+    <img src="assets/game.png" alt="Game" width="400">
+</div>
 
 ## Features
 1. **Runs while the game window is unfocused.**
 2. **Auto Walk** (movement timing may be bugged sometimes, so use it in enclosed spaces)
 3. **Auto Fish** (keybind 4, false swipe is necessary right now)
-4. **Auto Catch** (can specify Pokémon, currently uses Pokéballs, false swipe is necessary right now)
-5. **Auto Battle** (can be used for payday or level up, etc.)
-
-## To Do List
-- [ ] Add support for using other balls in Auto Catch.
-- [ ] Add support for selecting for pokemons to search for. 
-- [ ] Improve GUI Look and Feel 
-- [ ] Add support to select move use order. 
+4. **Auto Catch** (use false swipe for best results)
+5. **Auto Battle** (payday, level up, with **Custom Move Order**)
 
 ## How to Use
 
@@ -35,5 +33,9 @@
 
 ### Warning
 1. Movement key binds must be set to **WASD**.
-2. Fishing Rod must be set to **4**.
-3. Make sure after the client opens it says **Connected to Agent...**.
+2. Primary Key (A) should be set to Space
+3. Fishing Rod must be set to **4** to use Auto Fish.
+
+<div style="display: flex; justify-content: center;">
+    <img src="assets/keybindings.png" alt="Key Bindings" width="500">
+</div>
