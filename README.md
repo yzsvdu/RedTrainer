@@ -19,13 +19,13 @@
 - [Download Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
 ### Windows
-1. Download the `windows_build` from the [release](https://github.com/yzsvdu/RedTrainer/releases/tag/v1.1.0).
+1. Download the latest `windows_build` from the [release](https://github.com/yzsvdu/RedTrainer/releases).
 2. Copy and paste all files from the build into `C:\Program Files\PokeMMO`.
 3. Start the game with `windows_start.cmd`.
 4. Start the client by running `client.jar`.
 
 ### MacOS
-1. Download the `macos_build` from the [release](https://github.com/yzsvdu/RedTrainer/releases/tag/v1.1.0).
+1. Download the latest `macos_build` from the [release](https://github.com/yzsvdu/RedTrainer/releases).
 2. Copy and paste all files from the build into `/Users/(your-user-folder)/Library/Application Support/com.pokeemu.macos/pokemmo-client-live`.
 3. Start the game by running `./macos_start.sh`.
 4. Start the client by running `client.jar`.
