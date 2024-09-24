@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #111;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.trainer.client.ControlPanelController">
+   <children>
+      <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Settings">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit" />
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About Red Trainer" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <SplitPane orientation="VERTICAL" style="-fx-background-color: #111;">
+        <items>
+            <SplitPane dividerPositions="0.3" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #111;">
+               <items>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="WARNING: SET SPACE AS PRIMARY" textFill="#e16868" />
+                              <ToggleButton fx:id="agentToggleButton" mnemonicParsing="false" onAction="#onAgentToggleButtonClick" style="-fx-background-color: #88e088;" text="Enable Bot" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </ToggleButton>
+                              <CheckBox fx:id="autoBattleCheckBox" mnemonicParsing="false" onAction="#onAutoBattleCheckBoxClick" text="Auto Battle (Kill)" textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </CheckBox>
+                              <CheckBox fx:id="autoCatchCheckBox" mnemonicParsing="false" onAction="#setAutoCatchCheckBox" text="Auto Catch (Pokeball)" textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </CheckBox>
+                              <CheckBox fx:id="autoCatchCheckBox1" disable="true" mnemonicParsing="false" onAction="#setAutoCatchCheckBox" selected="true" text="Use False Swipe (if available)" textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </CheckBox>
+                              <CheckBox fx:id="autoFishCheckBox" mnemonicParsing="false" onAction="#onAutoFishCheckBoxClick" text="Auto Fish (Set Rod on #4)" textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </CheckBox>
+                              <ComboBox fx:id="pokemonComboBox" prefWidth="150.0" promptText="Look for mons...">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                              <CheckBox fx:id="autoWalkCheckBox" mnemonicParsing="false" onAction="#onAutoWalkCheckBoxClick" text="Auto Walk (WASD)" textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </CheckBox>
+                              <ComboBox fx:id="walkPatternComboBox" prefWidth="150.0" promptText="Select walk pattern">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                              <ComboBox fx:id="walkRadiusComboBox" disable="true" prefWidth="150.0" promptText="Select walk radius">
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox spacing="20.0" style="-fx-background-color: #111;">
+                           <children>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <VBox fx:id="slot1mon">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="1." textFill="#a1ee77" />
+                                                <Label text="PKMN" textFill="#a1ee77">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Lv 100" textFill="#a1ee77" />
+                                                <Label text="237/237" textFill="#a1ee77" />
+                                             </children>
+                                          </HBox>
+                                          <Line endX="200.0" stroke="#4cff46" strokeWidth="5.0" />
+                                          <Line endX="200.0" stroke="#ff6969" strokeWidth="3.0" />
+                                          <Line endX="200.0" stroke="#3abddd" strokeWidth="3.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="slot2mon">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="2." textFill="WHITE" />
+                                                <Label text="PKMN" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Lv 100" textFill="WHITE" />
+                                                <Label text="237/237" textFill="WHITE" />
+                                             </children>
+                                          </HBox>
+                                          <Line endX="200.0" stroke="#4cff46" strokeWidth="5.0" />
+                                          <Line endX="200.0" stroke="#ff6969" strokeWidth="3.0" />
+                                          <Line endX="200.0" stroke="#3abddd" strokeWidth="3.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <VBox fx:id="slot3mon">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="3." textFill="#d3d3d3" />
+                                                <Label text="PKMN" textFill="#d3d3d3">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Lv 100" textFill="#d3d3d3" />
+                                                <Label text="237/237" textFill="#d3d3d3" />
+                                             </children>
+                                          </HBox>
+                                          <Line endX="200.0" stroke="#4cff46" strokeWidth="5.0" />
+                                          <Line endX="200.0" stroke="#ff6969" strokeWidth="3.0" />
+                                          <Line endX="200.0" stroke="#3abddd" strokeWidth="3.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="slot4mon">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="4." textFill="WHITE" />
+                                                <Label text="PKMN" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Lv 100" textFill="WHITE" />
+                                                <Label text="237/237" textFill="WHITE" />
+                                             </children>
+                                          </HBox>
+                                          <Line endX="200.0" stroke="#4cff46" strokeWidth="5.0" />
+                                          <Line endX="200.0" stroke="#ff6969" strokeWidth="3.0" />
+                                          <Line endX="200.0" stroke="#3abddd" strokeWidth="3.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <VBox fx:id="slot5mon">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="5." textFill="WHITE" />
+                                                <Label text="PKMN" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Lv 100" textFill="WHITE" />
+                                                <Label text="237/237" textFill="WHITE" />
+                                             </children>
+                                          </HBox>
+                                          <Line endX="200.0" stroke="#4cff46" strokeWidth="5.0" />
+                                          <Line endX="200.0" stroke="#ff6969" strokeWidth="3.0" />
+                                          <Line endX="200.0" stroke="#3abddd" strokeWidth="3.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="slot6mon">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="6." textFill="WHITE" />
+                                                <Label text="PKMN" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Lv 100" textFill="WHITE" />
+                                                <Label text="237/237" textFill="WHITE" />
+                                             </children>
+                                          </HBox>
+                                          <Line endX="200.0" stroke="#4cff46" strokeWidth="5.0" />
+                                          <Line endX="200.0" stroke="#ff6969" strokeWidth="3.0" />
+                                          <Line endX="200.0" stroke="#3abddd" strokeWidth="3.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <CheckBox disable="true" mnemonicParsing="false" selected="true" text="Use Custom Move Priority" textFill="WHITE" />
+                                    <CheckBox alignment="CENTER" disable="true" mnemonicParsing="false" text="Automatic" textFill="WHITE" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #333;">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="10.0">
+                                       <children>
+                                          <VBox style="-fx-background-color: #0AA; -fx-background-radius: 12;">
+                                             <children>
+                                                <Label text="Combat Move 1" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="move1priority" prefWidth="150.0" promptText="Set Priority">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox style="-fx-background-color: #0AA; -fx-background-radius: 12;">
+                                             <children>
+                                                <Label text="Combat Move 2" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="move2priority" prefWidth="150.0" promptText="Set Priority">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" spacing="10.0">
+                                       <children>
+                                          <VBox style="-fx-background-color: #0AA; -fx-background-radius: 12;">
+                                             <children>
+                                                <Label text="Combat Move 3" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="move3priority" prefWidth="150.0" promptText="Set Priority">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox style="-fx-background-color: #0AA; -fx-background-radius: 12;">
+                                             <children>
+                                                <Label text="Combat Move 4" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="move4priority" prefWidth="150.0" promptText="Set Priority">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
+      <TextArea fx:id="consoleLogArea" style="-fx-control-inner-background: #333;" />
+      <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+         <children>
+            <Pane prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="connectionStatusLabel" maxWidth="-1.0" text="Disconnected from Agent" textFill="#e75050" HBox.hgrow="NEVER">
+               <font>
+                  <Font size="11.0" fx:id="x3" />
+               </font></Label>
+         </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
