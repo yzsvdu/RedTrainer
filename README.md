@@ -1,4 +1,10 @@
 # Red Trainer by vnnsnnt
+
+
+## 🎃 Halloween Update Fix Poll 🎃 [**Go to Poll**](https://github.com/yzsvdu/RedTrainer/discussions/8)
+
+
+
 ## A PokeMMO Bot Client
 
 <img src="assets/controls.png" alt="Control Panel" style="width: 100%; max-width: 800px; margin-right: 10px;">
