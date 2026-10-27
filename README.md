@@ -20,7 +20,7 @@ Catch Pokémon, farm payday, while you sleep or do other tasks on your computer
 - **Unfocused Window Support** — Run automation in the background while the game window is unfocused, allowing you to multitask.
 
 ## Availability
-Client available for a small one-time fee.
+Client available for a small one-time fee $5. 
 
 For access, contact **vnnsnnt@gmail.com**.
 
